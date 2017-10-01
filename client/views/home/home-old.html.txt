@@ -1,0 +1,308 @@
+<template name="home">
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="row">
+
+                <a class="navbar-brand link" href="{{pathFor 'home'}}">
+                
+
+                    {{Config.name}}</a>
+                <div id="main-nav" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        {{#if User}}
+                        
+                         {{#if isInRole 'player'}}
+                            <li><a href="{{pathFor 'playersByOwner' _id=User._id}}">My Player Page</a></li>
+                        {{/if}}
+                        {{#if isInRole 'agent'}}
+                            <li><a href="">I'm an agent</a></li>
+                        {{/if}}
+                       
+                        {{> userDropdown}}
+                       
+                        {{else}}
+                        <li>
+                            <a href="{{pathFor 'atSignIn'}}" class="link btn-default">{{_ "login2"}}</a>
+                        </li>
+                        <li>
+                            <a href="{{pathFor 'atSignUp'}}" class="link btn-default">{{_ "signup"}}</a>
+                        </li>
+                        {{/if}}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    {{>homePlayersPosts}}
+
+
+</template>
+
+
+
+<template name="homePlayersPosts">
+    
+   <section id="blog-section" >
+     <div class="container">
+       <div class="row">
+         <div class="col-lg-8">
+           <div class="row">
+                {{#each  posts}}
+                {{> playerPost}}
+                {{else}}
+                 {{> noData}}
+                {{/each}}
+
+               
+          </div>
+          </div>
+           
+<!--  // RECENT POST===========-->
+         <div class="col-lg-4">           
+               <div class="widget-sidebar">
+                 <h2 class="title-widget-sidebar">// RECENT POST</h2>
+                  {{#each  lastTenTwitterFeeds}}
+                  <div class="content-widget-sidebar">
+                    <ul>
+                         {{> twitterFeed}}
+                    </ul>
+                   </div>
+               
+                {{else}}
+                 {{> noData}}
+                {{/each}}
+
+                 </div>
+             
+
+             
+        <!--=====================
+               CATEGORIES
+          ======================
+             <div class="widget-sidebar">
+              <h2 class="title-widget-sidebar">// CATEGORIES</h2>
+                 <button class="categories-btn">cat1</button>
+                 <button class="categories-btn">cat2</button>
+                 <button class="categories-btn">cat3</button>
+                 <button class="categories-btn">cat4</button>
+             </div>   --> 
+             </div>
+           </div>
+         </div>
+     
+    </section>
+</template>
+
+<template name="twitterFeed">
+            
+                     <li class="recent-post">
+                        <div class="post-img">
+                         <!--<img src="" class="img-responsive">-->
+                         </div>
+                         <a href="#"><h5>{{text}}</h5></a>
+                         <p><small><i class="fa fa-calendar" data-original-title="" title=""></i> 30 Juni 2014</small></p>
+                        </li>
+                        <hr>
+</template>
+
+<template name="homePlayers">
+     <section id="intro" class="colored">
+<div class="container">
+	<div class="row template-players" >
+		{{#each  players}}
+		{{> homePlayer}}
+		{{else}}
+		{{> noData}}
+		{{/each}}
+    </div>
+           </div>
+     </section>
+</template>
+
+
+<template name="homePlayer">
+<div class="col-md-8">{{_id}}</div>
+</template>
+
+
+
+
+<template name="home-old">
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="row">
+
+                <a class="navbar-brand link" href="{{pathFor 'home'}}">{{Config.name}}</a>
+                <div id="main-nav" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        {{#if User}}
+                        {{> userDropdown}}
+                        {{else}}
+                        <li>
+                            <a href="{{pathFor 'atSignIn'}}" class="link">{{_ "login2"}}</a>
+                        </li>
+                        <li>
+                            <a href="{{pathFor 'atSignUp'}}" class="link btn btn-hollow">{{_ "signup"}}</a>
+                        </li>
+                        {{/if}}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <section id="intro" class="colored text-center">
+        <div class="container">
+            <div class="intro-well wow animated bounceIn">
+                <div class="row">
+                    <div class="col-lg-12 col-sm-12">
+                        <h1>{{Config.title}}</h1>
+                        <h2 class="hidden-xs">{{Config.subtitle}}</h2>
+                        {{#if User}}
+                        <a href="{{pathFor 'dashboard'}}" class="btn btn-success"><i class="fa fa-dashboard"></i> {{_ "dashboard"}}</a>
+                        {{else}}
+                        <a class="btn btn-hollow" href="{{pathFor 'atSignUp'}}">{{_ "getstarted"}}</a>
+                        {{/if}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="how-it-works" class="text-center">
+        <div class="container wow fadeIn animated">
+            <div class="row col-md-12">
+                <h3>{{_ "how"}}</h3>
+                <h4>{{Config.name}} - {{Config.subtitle}}</h4>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row" id="icon-row">
+                <div class="col-md-4 wow fadeInUp animated" data-wow-delay="0.4s">
+                    <div class="iconbox">
+                        <i class="fa fa-plane fa-3x"></i>
+                    </div>
+                    <h2 class="icntitle">1. {{_ "step_1"}}</h2>
+                    <p class="icnp">{{_ "step_1_text"}}</p>
+                </div>
+                <div class="col-md-4 wow fadeInUp animated" data-wow-delay="0.8s">
+                    <div class="iconbox">
+                        <i class="fa fa-bolt fa-3x"></i>
+                    </div>
+                    <h2 class="icntitle">2. {{_ "step_2"}}</h2>
+                    <p class="icnp">{{_ "step_2_text"}}</p>
+                </div>
+                <div class="col-md-4 wow fadeInUp animated" data-wow-delay="1.2s">
+                    <div class="iconbox">
+                        <i class="fa fa-check fa-3x"></i>
+                    </div>
+                    <h2 class="icntitle">3. {{_ "step_3"}}</h2>
+                    <p class="icnp">{{_ "step_3_text"}}</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="ipad" class="colored text-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6">
+                    <h3>{{_ "section_ipad_header"}}</h3>
+                    <p>{{_ "section_ipad_text"}}</p>
+                    <p class="text-center">
+                    <a href="{{Config.about}}" target="_blank" class="btn btn-success">
+                    {{_ "section_ipad_btn"}}
+                    </a>
+                    </p>
+                </div>
+                <div class="col-sm-6 wow animated fadeInRight" data-wow-delay="1s">
+
+                    <!--<img id="ipad" src="/img/ipad.png" alt=""  >-->
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="final">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 text-center wow fadeInDown animated" data-wow-delay="0.8s">
+                    <h3>
+                    {{_ "final_text"}}
+                    </h3>
+                    <div class="text-center">
+                        <a class="btn btn-primary" href="{{pathFor 'atSignUp'}}">{{_ "final_cta"}}</a>
+                    </div>
+                </div>
+                <div class="col-md-8  wow fadeInUp animated" data-wow-delay="0.6s">
+                    <!-- <img src="img/screenshot.png" class="img-responsive wow" data-wow-delay="0.6s" alt="picture"> -->
+                </div>
+            </div>
+        </div>
+    </section>
+</template>
+
+
+
+
+<template name ="playerPost">
+    
+            <div class="col-lg-6 col-md-6">
+             <aside>
+                   <div class="content-title">
+
+                
+                 <h3><a href="#">{{title}}</a></h3>
+                </div>
+               {{#with getDoc picture 'Attachments'}}
+                            <img src="{{url}}" class="img-thumbnail img-rounded img-responsive"  >
+                {{/with}}
+              
+              <div class="text-center">
+               {{content}}
+                </div>
+                     
+                
+                <div class="content-footer">
+<!--
+                    {{#with getDoc player 'Players'}}
+                            {{#with getDoc picture 'ProfilePictures'}}
+                            <img  src="{{url store='thumbs'}}" data-playerProfileImg="{{url store='thumbs'}}" class="user-small-img">
+                    {{/with}}
+              
+ 
+                <span style="font-size: 16px;color: #fff;">
+
+                    <a href="{{pathFor 'fullPlayerProfile'}}"> {{fullName}} </a>
+                </span>
+                    
+                    <div class="user-ditels">
+                    <div class="user-img">
+
+                            {{#with getDoc picture 'ProfilePictures'}}
+                            <img  src="{{url store='thumbs'}}" data-playerProfileImg="{{url store='thumbs'}}" class="img-responsive">
+                            {{/with}}
+                    </div>
+                        <span class="user-full-ditels">
+                        <h3>{{fullName}}</h3>
+                        <p>{{marketValue}}</p>
+                        </span>
+                        <div class="social-icon">
+                        <a href="#"><i class="fa fa-facebook" data-toggle="tooltip" data-placement="bottom" title="Facebook"></i></a>
+                        <a href="#"><i class="fa fa-twitter" data-toggle="tooltip" data-placement="bottom" title="Twitter"></i></a>
+                        <a href="#"><i class="fa fa-google-plus" data-toggle="tooltip" data-placement="bottom" title="Google Plus"></i></a>
+                        <a href="#"><i class="fa fa-youtube" data-toggle="tooltip" data-placement="bottom" title="Youtube"></i></a>
+                                     
+                    </div>
+                    </div>
+                     {{/with}}
+                      -->
+                      <span class="pull-right" style="color: #fff;">
+                            <i class="fa fa-thumbs-o-up" ></i> {{#with favoritesByDoc _id}}{{count}}{{/with}}
+                            <i class="fa fa-comments-o" ></i> {{commentCount _id}}
+                        </span>
+
+                </div>
+               
+
+             </aside>
+            </div>
+</template>

@@ -1,0 +1,37 @@
+
+.home-layout
+
+{
+  section
+  {
+    padding-top: 50px;
+    padding-bottom: 100px;
+  }
+  section#intro
+  {
+    h1
+    {
+      padding-top: 100px;
+      @media (max-width: 768px) {
+        padding-top: 10px;
+      }
+    }
+    a.btn
+    {
+      margin-top: 10px;
+      color:white;
+    }
+  }
+
+}
+
+//.profile-img{box-shadow: 0 5px 15px rgba(0,0,0,.5)}
+
+//@import '{codelovers:bootstrap-material-design-less}/less/material.less';
+//@import '{codelovers:bootstrap-material-design-less}/less/material-fullpalette.less'; 
+//@import '{codelovers:bootstrap-material-design-less}/less/roboto.less';
+//@import '{codelovers:bootstrap-material-design-less}/less/ripples.less';
+
+
+
+

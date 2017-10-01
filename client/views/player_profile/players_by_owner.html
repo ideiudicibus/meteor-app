@@ -1,0 +1,59 @@
+
+
+<template name="playersByOwner">
+    <div class="container">
+			<div class="row">
+				
+				<div class="col-md-12">
+	<div class="row template-players">
+		{{#each  playersByOwner}}
+		{{> playerByOwner}}
+		{{else}}
+		{{> noData}}
+      
+
+		{{/each}}
+       
+         {{#if $lt playersByOwnerCount 1}}
+            {{#afModal title="insert player profile" omitFields="createdAt,updatedAt,owner" class="text-primary" collection="Players" operation="insert" }}
+				<button class="btn btn-default" ><i class="fa fa-pencil" buttonContent="Insert Player Profile"></i> {{_ "insert_player_profile"}}</button>
+			{{/afModal}}
+
+		 {{/if}}
+
+    </div>
+    </div>
+			</div>
+		</div>
+</template>
+
+
+<template name="playerByOwner">
+<div class="panel-body">
+					<p class="text-center">
+					{{fullName}}
+					</p>
+					<div class="media">
+						<a class="pull-left" href="#">
+							
+						</a>
+						<div class="media-body">
+							
+							{{#if $eq owner User._id}}
+							<small>
+								{{#afModal title="Update player profile" omitFields="riched_id,createdAt,updatedAt,owner" class="text-primary" collection="Players" operation="update" doc=_id}}
+									<button class="btn btn-default" ><i class="fa fa-pencil" buttonContent="Edit Player"></i> {{_ "edit_player_profile"}}</button>
+								{{/afModal}}
+								{{#afModal title="Delete player profile" class="text-danger" collection="Players" operation="remove" doc=_id}}
+									<button class="btn btn-default" ><i class="fa fa-times" buttonContent="Delete Player"></i> {{_ "delete_player_profile"}}</button>
+								{{/afModal}}
+							</small>
+							{{/if}}
+
+						</div>
+					</div>
+				</div>
+    
+</template>
+
+

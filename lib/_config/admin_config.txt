@@ -1,0 +1,53 @@
+/**@AdminConfig =
+	name: Config.name
+	adminEmails: ['i.deiudicibus@gmail.com']
+	collections:
+		Players:
+			color:'red'
+			icon:'pencil'
+			extraFields:['owner']
+			tableColumns: [
+				{label:'Full name',name:'fullName'}
+				{label:'Nationality',name:'nationality'}
+			]
+		Donations:
+		   color: 'red'
+		   extraFields: ['player']
+		Posts:
+			color: 'red'
+			icon: 'pencil'
+			extraFields: ['owner']
+			tableColumns: [
+				{ label: 'Title', name: 'title' }
+				{ label: 'User', name: 'author()', template: 'adminUserCell' }
+			]
+		Comments:
+			color: 'green'
+			icon: 'comments'
+			extraFields: ['doc', 'owner']
+			tableColumns: [
+				{ label: 'Content', name: 'content' }
+				{ label: 'Post', name: 'docTitle()', template: 'adminPostCell' }
+				{ label: 'User', name: 'author()', template: 'adminUserCell' }
+			]
+			children: [
+				{
+					find: (comment) ->
+						Posts.find comment.doc, limit: 1
+				}
+				{
+					find: (comment) ->
+						Meteor.users.find comment.owner, limit: 1
+				}
+			]
+        'Meteor.roles':
+		    tableColumns:
+			  [
+			    {label:'Name',name:'Name'}
+			  ]			
+	dashboard:
+		homeUrl: '/dashboard'
+	autoForm:
+		omitFields: ['createdAt', 'updatedAt']
+
+**/

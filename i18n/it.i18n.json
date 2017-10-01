@@ -1,0 +1,82 @@
+{
+
+	/*Config*/
+	"configName": "My App",
+	"configTitle": "Make Meteor Apps. Fast.",
+	"configSubtitle": "Create beautiful and functioning Meteor apps really quick",
+	
+	/*Home*/
+	"getstarted": "Get Started",
+	"dashboard": "Go to dashboard",
+	"learn": "Learn more",
+	"intro": "Make Meteor Apps. Fast.",
+	"how": "How It Works",
+	"step_1": "Step 1",
+	"step_1_text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+	"step_2": "Step 2",
+	"step_2_text": "Oratio me istius philosophi non offendit; Qua tu etiam inprudens utebare non numquam.",
+	"step_3": "Step 3",
+	"step_3_text": "Et ille ridens: Video, inquit, quid agas; Duo Reges: constructio interrete.",
+	"section_ipad_header": "A revolutionary product",
+	"section_ipad_text": "Do really cool stuff really quickly",
+	"section_ipad_btn": "Made by MeteorFactory",
+	"final_text": "Your life will be instantly better.",
+	"final_cta": "Take a look",
+
+	/*Shared*/
+
+	"favorite": "Favorite",
+
+	 /*Navbar*/
+	"admin": "Amministrazione",
+	"profile": "Profilo",
+	"account": "Utente",
+	"signout": "Esci",
+	"signup": "Registrati",
+	"login": "Entra",
+	"login2": "Entra",
+	"edit_profile": "Modifica Profilo",
+	"notifications": "Notifiche",
+
+	/*Not Found*/
+	"not_found": "Spiacente, non ho trovato nulla....",
+
+
+	/*Dashboard*/
+	"add_post": "Aggiungi a Post",
+	"add_post_btn": "Aggiungi Post",
+	"add_post_modal": "Aggiungi Post modal",
+	"add_post_modal_btn": "Aggiungi un nuovo Post",
+	"edit_post": "Edit Post",
+	"delete": "Elimina",
+	"favorites": "Favoriti",
+
+	/*Account*/
+	"account_details": "Account Details",
+	"delete_account": "Delete Account",
+	"delete_account_warn": "There's no coming back from this one",
+	"delete_account_warn2": "Are you sure you want to delete your account?",
+	"close": "Close",
+	"change_pswd": "Change Password",
+
+	/*Profile*/
+	"update": "Aggiorna",
+
+	/*Posts*/
+
+	"postTitle": "Title",
+	"postContent": "Content",
+	"postPicture": "Picture",
+	// "uploadLabel": "Choose File"
+	"profilePicture": "Profile Picture",
+
+    /*Players*/
+
+	"edit_player_profile":"modifica profilo giocatore",
+	"delete_player_profile":"elimina profilo",
+
+	"scrape": "importa un Player da TransferMarkt"
+	
+
+
+}

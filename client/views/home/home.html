@@ -1,0 +1,197 @@
+<template name="home">
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="row">
+                <a class="navbar-brand link" href="{{pathFor route='home'}}">
+
+                    <img style="margin-top: -18px;"
+                    src="img/logo-new.png">
+                </a>
+                <div id="main-nav" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        {{#if User}}
+                        {{> userDropdown}}
+                        {{else}}
+                        <li>
+                            <a href="{{pathFor 'atSignIn'}}" class="link">{{_ "login2"}}</a>
+                        </li>
+                        <li>
+                            <a href="{{pathFor 'atSignUp'}}" class="link btn btn-hollow">{{_ "signup"}}</a>
+                        </li>
+                        {{/if}}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <section id="intro" class="colored text-center">
+            <div class="container">
+                    <div class="row" style="margin-top:20px">
+                        <div class="[ col-xs-12 col-sm-6 ]">
+                            <ul class="event-list">
+                                {{#each books}}
+                                {{>book}}
+                                {{/each}}
+                            </ul>
+                        </div>
+                        <div class="[ col-xs-12 col-sm-6 ]">
+                                <div class="panel">
+
+                                    <p>
+                                        playeragent.it
+                                        News Content 
+                                        
+                                    </p>
+                                </div>
+                            </div>
+                       
+                    </div>
+                </div>
+    </section>
+    <section id="top_profile">
+        <div class="container" style="margin-top: 20px; margin-bottom: 20px;">
+                {{#if featuredDigestPlayers.count}}
+                <div class="row nav">  
+                    
+                       
+                        <div class="col-md-4">
+                                <div class="col-md-4 col-xs-4 well-yellow"><i class="fa fa-star fa-lg"></i> Featured Player</div>  
+                        </div>
+                    </div>
+                  
+                {{#each featuredDigestPlayers}}
+                
+               
+            <div class="row panel">
+               
+                    
+                            <div class="col-md-4 bg_blur ">
+                              
+                                    <a href="{{pathFor 'fullPlayerProfile' _id}}" >
+                                     
+                                
+                                    {{#with getDoc picture 'ProfilePictures'}}
+                                    <img  src="{{url store='thumbs'}}" data-playerProfileImg="{{url store='thumbs'}}" class="media-object img-circle img-responsive" width="300px" height="300px">
+                                    {{/with}}
+                                </a>
+                            </div>
+                            <div class="col-md-4  col-xs-6">
+                                   
+                               <div class="header">
+                                    
+                                    
+                                    <h1>{{fullName}}</h1>
+                                    
+                                    <h4>position:{{position}}</h4>
+                                    <span>  
+                                            <p class="text-muted">current club: {{currentClub}}</p>
+                                            <p>{{nationality}}</p>
+                                            <p class="text-muted">birth date: {{formatDate birthDate}}</p>
+                                            <p class="text-muted">age: {{calculateAgeFromDate birthDate}}</p>
+            
+                                    </span>
+                               </div>
+                            </div>
+                            <div class="col-md-4 bg_blur" style="margin-top: 60px">
+                                    <div class="progress blue">
+                                            <span class="progress-left">
+                                                <span class="progress-bar"></span>
+                                            </span>
+                                            <span class="progress-right">
+                                                <span class="progress-bar"></span>
+                                            </span>
+                                            <div class="progress-value"> {{formatMoney lastTransfer.market_value}}</div>
+                                    </div>
+                               
+                            </div>       
+                  
+            </div>   
+            
+            <div class="row nav">    
+                <div class="col-md-4"></div>
+                <div class="col-md-8 col-xs-12" style="margin: 0px;padding: 0px;">
+
+                    <div class="col-md-4 col-xs-4 well"><i class="fa fa-weixin fa-lg"></i> 16</div>
+                    <div class="col-md-4 col-xs-4 well"><i class="fa fa-heart-o fa-lg"></i> 14</div>
+                    <div class="col-md-4 col-xs-4 well"><i class="fa fa-thumbs-o-up fa-lg"></i> 26</div>
+                </div>
+            </div>
+
+
+                {{/each}}
+            {{/if}}
+            <!--
+                -->
+        </div> 
+
+    </section>
+
+    <section id="videos">
+
+            <div class="container" >
+
+              {{#with post}}
+              
+                    
+                        <div class="row nav">    
+                                <div class="col-md-4">
+                                        <div class="col-md-4 col-xs-4 well-yellow"><i class="fa fa-star fa-lg"></i> Featured Video</div>  
+                                </div>
+                            </div>
+                    <div class="row panel">
+                        <div class="col-md-6 ">
+                               {{{content}}}
+                        </div>
+                        <div class="col-md-6">
+                                <i class="fa fa-thumbs-up"></i> {{#with favoritesByDoc _id}}{{count}}{{/with}}
+                                <i class="fa fa-comments"></i> {{commentCount _id}}
+                                {{> comments}}
+                        </div>
+                    </div>   
+              {{/with}}
+            </div>
+               
+              
+        
+        
+
+    </section>
+
+
+    
+</template>
+
+<template name="waitForFeeds">
+        <div class="col-md-offset-7 col-md-5">
+                <div class="panel panel-default">
+                    <div class="panel-heading" id="accordion">
+                            <div class="header">
+                                    <small class=" text-muted"><span class="glyphicon glyphicon-time"></span>Waiting for feeds</small> 
+                                </div>
+                    </div>
+                </div>
+        </div>
+</template>
+
+
+<template name="book">            
+            <li>
+                    <time datetime="{{created_at}}">
+                        <span class="day">{{getDay created_at}}</span>
+                        <span class="month">{{getMonth created_at}}</span>
+                        <span class="year">{{getYear created_at}}</span>
+                        <span class="time"></span>
+                    </time>
+                    <img src={{user.profile_image_url}} alt="{{user.screen_name}}">
+                    <div class="info">
+                        <h2 class="title">{{user.name}}  {{user.location}}</h2>
+                        <p class="desc">{{{text}}}</p>
+                    </div>
+                    <div class="social">
+                       
+                    </div>
+                </li>
+
+
+</template>
+
